@@ -15,9 +15,9 @@ function App() {
   const [contactSubmitted, setContactSubmitted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeTimeline, setActiveTimeline] = useState(0)
-  const [showScrollTop, setShowScrollTop] = useState(false)
   const [activeShowcase, setActiveShowcase] = useState(0)
   const [emailInput, setEmailInput] = useState('')
+  const [activeNav, setActiveNav] = useState('home')
 
   // Countdown timer
   useEffect(() => {
@@ -40,11 +40,37 @@ function App() {
     return () => clearInterval(timer)
   }, [])
 
-  // Scroll to top button visibility
+  // Section animations on scroll
   useEffect(() => {
-    const handleScroll = () => setShowScrollTop(window.scrollY > 400)
+    const handleScroll = () => {
+      document.querySelectorAll('.section-animate').forEach(el => {
+        const rect = el.getBoundingClientRect()
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add('visible')
+        }
+      })
+    }
     window.addEventListener('scroll', handleScroll)
+    // Trigger on load
+    setTimeout(handleScroll, 100)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Scroll-based nav active detection
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveNav(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: '-20% 0px -60% 0px' }
+    )
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
   // Timeline auto-cycle
@@ -153,6 +179,20 @@ function App() {
     }
   }, [])
 
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const getInitialsSvg = (name) => {
+    const initials = name.split(' ').map(n => n[0]).join('')
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect fill='%23ff6b35' width='400' height='400'/%3E%3Ctext x='200' y='200' text-anchor='middle' dominant-baseline='central' font-family='Poppins,sans-serif' font-size='100' font-weight='700' fill='white'%3E${encodeURIComponent(initials)}%3C/text%3E%3C/svg%3E`
+  }
+
+  const handleImgError = (e, fallbackSrc) => {
+    e.target.onerror = null
+    e.target.src = fallbackSrc || getInitialsSvg('Chef')
+  }
+
   return (
     <div className="app">
       {/* Header / Nav */}
@@ -166,12 +206,12 @@ function App() {
             </div>
           </div>
           <nav className={`nav ${mobileMenuOpen ? 'nav-open' : ''}`}>
-            <a href="#home" className="nav-link active">Home</a>
-            <a href="#menu" className="nav-link">Menu</a>
-            <a href="#about" className="nav-link">About</a>
-            <a href="#team" className="nav-link">Team</a>
-            <a href="#blog" className="nav-link">Blog</a>
-            <a href="#contact" className="nav-link">Contact</a>
+            <a href="#home" className={`nav-link ${activeNav === 'home' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollToSection('home'); setMobileMenuOpen(false); }}>Home</a>
+            <a href="#about" className={`nav-link ${activeNav === 'about' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollToSection('about'); setMobileMenuOpen(false); }}>About</a>
+            <a href="#menu" className={`nav-link ${activeNav === 'menu' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollToSection('menu'); setMobileMenuOpen(false); }}>Menu</a>
+            <a href="#team" className={`nav-link ${activeNav === 'team' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollToSection('team'); setMobileMenuOpen(false); }}>Team</a>
+            <a href="#blog" className={`nav-link ${activeNav === 'blog' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollToSection('blog'); setMobileMenuOpen(false); }}>Blog</a>
+            <a href="#contact" className={`nav-link ${activeNav === 'contact' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); scrollToSection('contact'); setMobileMenuOpen(false); }}>Contact</a>
           </nav>
           <div className="header-actions">
             <button className="btn btn-primary btn-sm">Order Now</button>
@@ -183,68 +223,58 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="hero-section" id="home">
+      <section className="hero-section section-animate" id="home">
+        {/* Animated background patterns */}
+        <div className="hero-patterns" aria-hidden="true">
+          <div className="pattern-circle pc-1"></div>
+          <div className="pattern-circle pc-2"></div>
+          <div className="pattern-circle pc-3"></div>
+          <div className="pattern-ring pr-1"></div>
+          <div className="pattern-ring pr-2"></div>
+          <div className="pattern-dots"></div>
+        </div>
+
         <div className="container hero-grid">
           <div className="hero-content">
-            <span className="hero-badge">🍔 FOOD</span>
-            <h2 className="hero-title">
-              <span className="highlight">#1 Rated</span> Fast Food Restaurant in New York
-            </h2>
-            <h3 className="hero-subtitle">Delicious Fast Food <br />for Every Moment</h3>
+            <span className="hero-badge">#1 Rated in New York</span>
+            <h1 className="hero-heading">
+              Delicious Fast Food<br />
+              <span className="highlight">for Every Moment</span>
+            </h1>
             <p className="hero-desc">
-              Experience bold flavors crafted from premium ingredients. From crispy burgers to gourmet pizzas - every bite is an adventure worth savoring.
+              Experience bold flavors crafted from premium ingredients. From crispy burgers to gourmet pizzas — every bite is an adventure worth savoring.
             </p>
             <div className="hero-buttons">
               <button className="btn btn-primary btn-lg">Explore Menu</button>
               <button className="btn btn-outline btn-lg">▶ Watch Our Story</button>
             </div>
-            <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-num">850+</span>
-                <span className="stat-label">Happy Customers</span>
+            {/* Minimal trusted badge */}
+            <div className="hero-trusted">
+              <div className="trusted-avatars">
+                <span className="trusted-avatar" style={{background: '#ff6b35'}}>M</span>
+                <span className="trusted-avatar" style={{background: '#1a1a2e'}}>C</span>
+                <span className="trusted-avatar" style={{background: '#e85a26'}}>P</span>
+                <span className="trusted-avatar trusted-more">+2k</span>
               </div>
-              <div className="stat-divider"></div>
-              <div className="stat-item">
-                <span className="stat-num">120+</span>
-                <span className="stat-label">Menu Items</span>
-              </div>
-              <div className="stat-divider"></div>
-              <div className="stat-item">
-                <span className="stat-num">15+</span>
-                <span className="stat-label">Expert Chefs</span>
-              </div>
-              <div className="stat-divider"></div>
-              <div className="stat-item">
-                <span className="stat-num">12yr</span>
-                <span className="stat-label">Experience</span>
+              <div className="trusted-text">
+                <strong>Trusted by 2,000+</strong>
+                <span>happy customers weekly</span>
               </div>
             </div>
           </div>
           <div className="hero-visual">
             <div className="hero-image-wrapper">
+              <div className="hero-image-ring"></div>
               <div className="hero-image-placeholder">
-                <img src="/images/burger-hero.jpg" alt="Juicy gourmet burger" className="hero-img" />
+                <img src="/images/burger-hero.jpg" alt="Juicy gourmet burger" className="hero-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               </div>
-              <div className="hero-floating-card card-1">
-                <span className="card-icon">🔥</span>
-                <div>
-                  <strong>Hot Deal</strong>
-                  <span>30% off today</span>
-                </div>
+              <div className="hero-badge-mini hb-1">
+                <span className="hbm-icon">⭐</span>
+                <span className="hbm-text">4.9/5</span>
               </div>
-              <div className="hero-floating-card card-2">
-                <span className="card-icon">⭐</span>
-                <div>
-                  <strong>4.9/5</strong>
-                  <span>2k+ reviews</span>
-                </div>
-              </div>
-              <div className="hero-floating-card card-3">
-                <span className="card-icon">🚚</span>
-                <div>
-                  <strong>20 min</strong>
-                  <span>Fast delivery</span>
-                </div>
+              <div className="hero-badge-mini hb-2">
+                <span className="hbm-icon">🔥</span>
+                <span className="hbm-text">Hot Deal</span>
               </div>
             </div>
           </div>
@@ -256,31 +286,31 @@ function App() {
         <div className="container">
           <div className="featured-items">
             <div className="featured-item">
-              <img src="/images/fried-chicken.jpg" alt="Crispy Fried Chicken" className="featured-img" />
+              <img src="/images/fried-chicken.jpg" alt="Crispy Fried Chicken" className="featured-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <span>Crispy Fried Chicken</span>
             </div>
             <div className="featured-item">
-              <img src="/images/burger-hero.jpg" alt="Gourmet Burgers" className="featured-img" />
+              <img src="/images/burger-hero.jpg" alt="Gourmet Burgers" className="featured-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <span>Gourmet Burgers</span>
             </div>
             <div className="featured-item">
-              <img src="/images/pizza.jpg" alt="Artisan Pizzas" className="featured-img" />
+              <img src="/images/pizza.jpg" alt="Artisan Pizzas" className="featured-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <span>Artisan Pizzas</span>
             </div>
             <div className="featured-item">
-              <img src="/images/wrap.jpg" alt="Fresh Wraps & Rolls" className="featured-img" />
+              <img src="/images/wrap.jpg" alt="Fresh Wraps & Rolls" className="featured-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <span>Fresh Wraps & Rolls</span>
             </div>
             <div className="featured-item">
-              <img src="/images/fried-chicken.jpg" alt="Loaded Fries" className="featured-img" />
+              <img src="/images/fried-chicken.jpg" alt="Loaded Fries" className="featured-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <span>Loaded Fries</span>
             </div>
             <div className="featured-item">
-              <img src="/images/ice-cream.jpg" alt="Ice Cream Shakes" className="featured-img" />
+              <img src="/images/ice-cream.jpg" alt="Ice Cream Shakes" className="featured-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <span>Ice Cream Shakes</span>
             </div>
             <div className="featured-item">
-              <img src="/images/wrap.jpg" alt="Grilled Sandwiches" className="featured-img" />
+              <img src="/images/wrap.jpg" alt="Grilled Sandwiches" className="featured-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
               <span>Grilled Sandwiches</span>
             </div>
           </div>
@@ -303,12 +333,12 @@ function App() {
                 onClick={() => setActiveCategory(cat.id)}
               >
                 <div className="category-icon">
-                  {cat.id === 'all' && <img src="/images/restaurant-interior.jpg" alt="All items" className="category-img" />}
-                  {cat.id === 'burgers' && <img src="/images/burger-hero.jpg" alt="Burgers" className="category-img" />}
-                  {cat.id === 'pizza' && <img src="/images/pizza.jpg" alt="Pizza" className="category-img" />}
-                  {cat.id === 'chicken' && <img src="/images/fried-chicken.jpg" alt="Fried Chicken" className="category-img" />}
-                  {cat.id === 'wraps' && <img src="/images/wrap.jpg" alt="Wraps" className="category-img" />}
-                  {cat.id === 'desserts' && <img src="/images/dessert-cake.jpg" alt="Desserts" className="category-img" />}
+                  {cat.id === 'all' && <img src="/images/restaurant-interior.jpg" alt="All items" className="category-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />}
+                  {cat.id === 'burgers' && <img src="/images/burger-hero.jpg" alt="Burgers" className="category-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />}
+                  {cat.id === 'pizza' && <img src="/images/pizza.jpg" alt="Pizza" className="category-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />}
+                  {cat.id === 'chicken' && <img src="/images/fried-chicken.jpg" alt="Fried Chicken" className="category-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />}
+                  {cat.id === 'wraps' && <img src="/images/wrap.jpg" alt="Wraps" className="category-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />}
+                  {cat.id === 'desserts' && <img src="/images/dessert-cake.jpg" alt="Desserts" className="category-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />}
                 </div>
                 <span className="category-name">{cat.name}</span>
                 <span className="category-count">{cat.count} items</span>
@@ -319,12 +349,12 @@ function App() {
       </section>
 
       {/* About / Our Story Section */}
-      <section className="section about-section" id="about">
+      <section className="section about-section section-animate" id="about">
         <div className="container about-grid">
           <div className="about-visual">
             <div className="about-image-placeholder">
               <span className="about-years-badge">12+<br />Years of<br />Excellence</span>
-              <img src="/images/restaurant-interior.jpg" alt="Restaurant interior" className="about-img" />
+              <img src="/images/restaurant-interior.jpg" alt="Restaurant interior" className="about-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
             </div>
           </div>
           <div className="about-content">
@@ -356,7 +386,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <button className="btn btn-primary">View Full Menu</button>
+            <button className="btn btn-primary" onClick={() => scrollToSection('menu')}>View Full Menu</button>
           </div>
         </div>
       </section>
@@ -388,7 +418,7 @@ function App() {
       </section>
 
       {/* Menu Section */}
-      <section className="section menu-section" id="menu">
+      <section className="section menu-section section-animate" id="menu">
         <div className="container">
           <div className="section-header">
             <span className="section-badge">What's Cooking</span>
@@ -406,8 +436,7 @@ function App() {
             {filteredMenuItems.map(item => (
               <div key={item.id} className="menu-card">
                 {item.badge && <span className="menu-badge">{item.badge}</span>}
-                <div className="menu-card-image">
-                  <img src={item.imageSrc} alt={item.alt} className="menu-img" />
+                <div className="menu-card-image">                    <img src={item.imageSrc} alt={item.alt} className="menu-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
                 <div className="menu-card-body">
                   <h3 className="menu-item-name">{item.name}</h3>
@@ -431,11 +460,10 @@ function App() {
       </section>
 
       {/* Limited Time Offer */}
-      <section className="limited-offer-section">
+      <section className="limited-offer-section section-animate">
         <div className="container limited-offer-grid">
           <div className="limited-offer-visual">
-            <div className="offer-image-placeholder">
-              <img src="/images/burger-offer.jpg" alt="Special burger offer" className="offer-img" />
+            <div className="offer-image-placeholder">                <img src="/images/burger-offer.jpg" alt="Special burger offer" className="offer-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
             </div>
           </div>
           <div className="limited-offer-content">
@@ -470,7 +498,7 @@ function App() {
       </section>
 
       {/* Food Showcase */}
-      <section className="section showcase-section">
+      <section className="section showcase-section section-animate">
         <div className="container">
           <div className="section-header">
             <span className="section-badge">Food Showcase</span>
@@ -482,8 +510,7 @@ function App() {
                 key={idx}
                 className={`showcase-card ${activeShowcase === idx ? 'active' : ''}`}
                 onClick={() => setActiveShowcase(idx)}
-              >
-                <img src={item.imageSrc} alt={item.alt} className="showcase-img" />
+              >                  <img src={item.imageSrc} alt={item.alt} className="showcase-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 <span className="showcase-name">{item.name}</span>
               </div>
             ))}
@@ -492,7 +519,7 @@ function App() {
       </section>
 
       {/* Timeline Section */}
-      <section className="section timeline-section">
+      <section className="section timeline-section section-animate">
         <div className="container">
           <div className="section-header">
             <span className="section-badge">Our Journey</span>
@@ -522,7 +549,7 @@ function App() {
       </section>
 
       {/* Chefs Section */}
-      <section className="section chefs-section" id="team">
+      <section className="section chefs-section section-animate" id="team">
         <div className="container">
           <div className="section-header">
             <span className="section-badge">The Culinary Team</span>
@@ -532,7 +559,7 @@ function App() {
             {chefs.map((chef, idx) => (
               <div key={idx} className="chef-card">
                 <div className="chef-image">
-                  <img src={chef.imageSrc} alt={chef.alt} className="chef-img" />
+                  <img src={chef.imageSrc} alt={chef.alt} className="chef-img" onError={(e) => handleImgError(e, getInitialsSvg(chef.name))} />
                 </div>
                 <h3 className="chef-name">{chef.name}</h3>
                 <span className="chef-role">{chef.role}</span>
@@ -611,7 +638,7 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="section testimonials-section">
+      <section className="section testimonials-section section-animate">
         <div className="container">
           <div className="section-header">
             <span className="section-badge">What People Say</span>
@@ -731,7 +758,7 @@ function App() {
       </section>
 
       {/* Blog Section */}
-      <section className="section blog-section">
+      <section className="section blog-section section-animate">
         <div className="container">
           <div className="section-header">
             <span className="section-badge">News & Updates</span>
@@ -745,7 +772,7 @@ function App() {
                     <span className="blog-date-num">{post.date}</span>
                     <span className="blog-date-month">{post.month}</span>
                   </div>
-                  <img src={post.imageSrc} alt={post.alt} className="blog-img" />
+                  <img src={post.imageSrc} alt={post.alt} className="blog-img" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                 </div>
                 <div className="blog-card-body">
                   <span className="blog-category">{post.category}</span>
@@ -926,13 +953,6 @@ function App() {
         </div>
       </footer>
 
-      {/* Scroll to Top */}
-      <button
-        className={`scroll-top ${showScrollTop ? 'visible' : ''}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      >
-        ↑
-      </button>
     </div>
   )
 }
