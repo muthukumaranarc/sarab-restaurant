@@ -73,20 +73,20 @@ function App() {
   ]
 
   const menuItems = [
-    { id: 1, category: 'burgers', type: 'hot', name: 'Classic Smash Burger', desc: 'Double smashed patty, cheddar, caramelized onions, pickles & special sauce', price: 14.99, oldPrice: 18.99, rating: 128, badge: 'Hot', image: '🍔' },
-    { id: 2, category: 'pizza', type: 'hot', name: 'Margherita Royale', desc: 'San Marzano tomatoes, buffalo mozzarella, basil & truffle oil on sourdough', price: 19.99, oldPrice: 24.99, rating: 95, badge: 'New', image: '🍕' },
-    { id: 3, category: 'chicken', type: 'hot', name: 'Nashville Hot Chicken', desc: 'Crispy fried chicken in fiery Nashville spice blend with honey drizzle', price: 12.99, oldPrice: 16.99, rating: 210, badge: 'Best Seller', image: '🍗' },
-    { id: 4, category: 'wraps', type: 'hot', name: 'Loaded Fajita Wrap', desc: 'Grilled chicken, peppers, sour cream & guacamole in a warm tortilla', price: 10.99, oldPrice: null, rating: 74, badge: '', image: '🌯' },
-    { id: 5, category: 'desserts', type: 'hot', name: 'Nutella Lava Cake', desc: 'Molten chocolate cake with Nutella center, vanilla ice cream & caramel', price: 8.99, oldPrice: 11.99, rating: 56, badge: 'New', image: '🍰' },
-    { id: 6, category: 'pizza', type: 'hot', name: 'Truffle Mushroom Pasta', desc: 'Al dente tagliatelle, wild mushrooms, black truffle, parmesan & thyme', price: 16.99, oldPrice: null, rating: 88, badge: "Chef's Pick", image: '🍝' },
-    { id: 7, category: 'burgers', type: 'burgers', name: 'Double Cheese Burger', desc: 'Two beef patties, double cheese, lettuce, tomato & secret sauce', price: 13.99, oldPrice: 16.99, rating: 145, badge: 'Popular', image: '🍔' },
-    { id: 8, category: 'burgers', type: 'burgers', name: 'Bacon BBQ Burger', desc: 'Smoked bacon, onion rings, BBQ sauce & cheddar on brioche bun', price: 15.99, oldPrice: null, rating: 98, badge: '', image: '🍔' },
-    { id: 9, category: 'pizza', type: 'pizza', name: 'Pepperoni Supreme', desc: 'Double pepperoni, mozzarella, oregano & house tomato sauce', price: 17.99, oldPrice: 21.99, rating: 167, badge: 'Best Seller', image: '🍕' },
-    { id: 10, category: 'pizza', type: 'pizza', name: 'Quattro Formaggi', desc: 'Four cheese blend: mozzarella, gorgonzola, parmesan & ricotta', price: 18.99, oldPrice: null, rating: 82, badge: '', image: '🍕' },
-    { id: 11, category: 'chicken', type: 'chicken', name: 'Buffalo Wings', desc: 'Crispy wings tossed in spicy buffalo sauce with blue cheese dip', price: 11.99, oldPrice: 14.99, rating: 193, badge: 'Hot', image: '🍗' },
-    { id: 12, category: 'chicken', type: 'chicken', name: 'Grilled Chicken Wrap', desc: 'Marinated grilled chicken, fresh veggies & tzatziki in whole wheat wrap', price: 10.99, oldPrice: null, rating: 76, badge: '', image: '🌯' },
-    { id: 13, category: 'desserts', type: 'desserts', name: 'Tiramisu', desc: 'Classic Italian tiramisu with mascarpone, espresso & cocoa', price: 7.99, oldPrice: 10.99, rating: 64, badge: '', image: '🍮' },
-    { id: 14, category: 'desserts', type: 'desserts', name: 'Ice Cream Sundae', desc: 'Triple scoop with hot fudge, caramel, nuts & whipped cream', price: 6.99, oldPrice: null, rating: 91, badge: 'New', image: '🍦' },
+    { id: 1, category: 'burgers', type: 'hot', name: 'Classic Smash Burger', desc: 'Double smashed patty, cheddar, caramelized onions, pickles & special sauce', price: 14.99, oldPrice: 18.99, rating: 128, badge: 'Hot', imageSrc: '/src/assets/burger-hero.jpg', alt: 'Classic smash burger' },
+    { id: 2, category: 'pizza', type: 'hot', name: 'Margherita Royale', desc: 'San Marzano tomatoes, buffalo mozzarella, basil & truffle oil on sourdough', price: 19.99, oldPrice: 24.99, rating: 95, badge: 'New', imageSrc: '/src/assets/pizza.jpg', alt: 'Margherita pizza royale' },
+    { id: 3, category: 'chicken', type: 'hot', name: 'Nashville Hot Chicken', desc: 'Crispy fried chicken in fiery Nashville spice blend with honey drizzle', price: 12.99, oldPrice: 16.99, rating: 210, badge: 'Best Seller', imageSrc: '/src/assets/fried-chicken.jpg', alt: 'Nashville hot chicken' },
+    { id: 4, category: 'wraps', type: 'hot', name: 'Loaded Fajita Wrap', desc: 'Grilled chicken, peppers, sour cream & guacamole in a warm tortilla', price: 10.99, oldPrice: null, rating: 74, badge: '', imageSrc: '/src/assets/wrap.jpg', alt: 'Loaded fajita wrap' },
+    { id: 5, category: 'desserts', type: 'hot', name: 'Nutella Lava Cake', desc: 'Molten chocolate cake with Nutella center, vanilla ice cream & caramel', price: 8.99, oldPrice: 11.99, rating: 56, badge: 'New', imageSrc: '/src/assets/dessert-cake.jpg', alt: 'Nutella lava cake' },
+    { id: 6, category: 'pizza', type: 'hot', name: 'Truffle Mushroom Pasta', desc: 'Al dente tagliatelle, wild mushrooms, black truffle, parmesan & thyme', price: 16.99, oldPrice: null, rating: 88, badge: "Chef's Pick", imageSrc: '/src/assets/pasta.jpg', alt: 'Truffle mushroom pasta' },
+    { id: 7, category: 'burgers', type: 'burgers', name: 'Double Cheese Burger', desc: 'Two beef patties, double cheese, lettuce, tomato & secret sauce', price: 13.99, oldPrice: 16.99, rating: 145, badge: 'Popular', imageSrc: '/src/assets/burger-offer.jpg', alt: 'Double cheese burger' },
+    { id: 8, category: 'burgers', type: 'burgers', name: 'Bacon BBQ Burger', desc: 'Smoked bacon, onion rings, BBQ sauce & cheddar on brioche bun', price: 15.99, oldPrice: null, rating: 98, badge: '', imageSrc: '/src/assets/burger-hero.jpg', alt: 'Bacon BBQ burger' },
+    { id: 9, category: 'pizza', type: 'pizza', name: 'Pepperoni Supreme', desc: 'Double pepperoni, mozzarella, oregano & house tomato sauce', price: 17.99, oldPrice: 21.99, rating: 167, badge: 'Best Seller', imageSrc: '/src/assets/pizza.jpg', alt: 'Pepperoni supreme pizza' },
+    { id: 10, category: 'pizza', type: 'pizza', name: 'Quattro Formaggi', desc: 'Four cheese blend: mozzarella, gorgonzola, parmesan & ricotta', price: 18.99, oldPrice: null, rating: 82, badge: '', imageSrc: '/src/assets/pizza.jpg', alt: 'Quattro formaggi pizza' },
+    { id: 11, category: 'chicken', type: 'chicken', name: 'Buffalo Wings', desc: 'Crispy wings tossed in spicy buffalo sauce with blue cheese dip', price: 11.99, oldPrice: 14.99, rating: 193, badge: 'Hot', imageSrc: '/src/assets/chicken-wings.jpg', alt: 'Buffalo chicken wings' },
+    { id: 12, category: 'chicken', type: 'chicken', name: 'Grilled Chicken Wrap', desc: 'Marinated grilled chicken, fresh veggies & tzatziki in whole wheat wrap', price: 10.99, oldPrice: null, rating: 76, badge: '', imageSrc: '/src/assets/wrap.jpg', alt: 'Grilled chicken wrap' },
+    { id: 13, category: 'desserts', type: 'desserts', name: 'Tiramisu', desc: 'Classic Italian tiramisu with mascarpone, espresso & cocoa', price: 7.99, oldPrice: 10.99, rating: 64, badge: '', imageSrc: '/src/assets/tiramisu.jpg', alt: 'Classic tiramisu' },
+    { id: 14, category: 'desserts', type: 'desserts', name: 'Ice Cream Sundae', desc: 'Triple scoop with hot fudge, caramel, nuts & whipped cream', price: 6.99, oldPrice: null, rating: 91, badge: 'New', imageSrc: '/src/assets/ice-cream.jpg', alt: 'Ice cream sundae' },
   ]
 
   const timelineData = [
@@ -97,10 +97,10 @@ function App() {
   ]
 
   const chefs = [
-    { name: 'Alice Mortal', role: 'Head Chef', exp: '12 years experience', image: '👩‍🍳' },
-    { name: 'Michael Corn', role: 'Grill Master', exp: '8 years experience', image: '👨‍🍳' },
-    { name: 'Faz Chowdel', role: 'Pastry Chef', exp: '10 years experience', image: '👨‍🍳' },
-    { name: 'William Latnum', role: 'Pizza Artisan', exp: '9 years experience', image: '👨‍🍳' }
+    { name: 'Alice Mortal', role: 'Head Chef', exp: '12 years experience', imageSrc: '/src/assets/chef.jpg', alt: 'Head Chef Alice Mortal' },
+    { name: 'Michael Corn', role: 'Grill Master', exp: '8 years experience', imageSrc: '/src/assets/chef-2.jpg', alt: 'Grill Master Michael Corn' },
+    { name: 'Faz Chowdel', role: 'Pastry Chef', exp: '10 years experience', imageSrc: '/src/assets/chef-3.jpg', alt: 'Pastry Chef Faz Chowdel' },
+    { name: 'William Latnum', role: 'Pizza Artisan', exp: '9 years experience', imageSrc: '/src/assets/chef-4.jpg', alt: 'Pizza Artisan William Latnum' }
   ]
 
   const testimonials = [
@@ -111,17 +111,17 @@ function App() {
   ]
 
   const blogPosts = [
-    { date: '14', month: 'Mar', category: 'Food & Health', title: 'Healthy Fast Food: A Myth or Beautiful Reality', author: 'James Writer', comments: 24 },
-    { date: '28', month: 'Feb', category: 'Food Science', title: "Is Fast Food Getting Healthier? Here's What We Found", author: 'Sarah Grain', comments: 18 },
-    { date: '05', month: 'Jan', category: 'Recipes', title: "Innovative Hot Chickpeas Flake Crackin' Recipe at Home", author: 'Chef Marcus', comments: 32 }
+    { date: '14', month: 'Mar', category: 'Food & Health', title: 'Healthy Fast Food: A Myth or Beautiful Reality', author: 'James Writer', comments: 24, imageSrc: '/src/assets/blog-1.jpg', alt: 'Healthy food blog post' },
+    { date: '28', month: 'Feb', category: 'Food Science', title: "Is Fast Food Getting Healthier? Here's What We Found", author: 'Sarah Grain', comments: 18, imageSrc: '/src/assets/blog-2.jpg', alt: 'Fast food health blog post' },
+    { date: '05', month: 'Jan', category: 'Recipes', title: "Innovative Hot Chickpeas Flake Crackin' Recipe at Home", author: 'Chef Marcus', comments: 32, imageSrc: '/src/assets/blog-3.jpg', alt: 'Chickpeas recipe blog post' }
   ]
 
   const showcaseItems = [
-    { name: 'Gourmet Burgers', icon: '🍔' },
-    { name: 'Wood-Fired Pizza', icon: '🍕' },
-    { name: 'Crispy Fried Chicken', icon: '🍗' },
-    { name: 'Sweet Desserts', icon: '🍰' },
-    { name: 'Fresh Wraps & Rolls', icon: '🌯' }
+    { name: 'Gourmet Burgers', imageSrc: '/src/assets/burger-hero.jpg', alt: 'Gourmet Burgers' },
+    { name: 'Wood-Fired Pizza', imageSrc: '/src/assets/pizza.jpg', alt: 'Wood-Fired Pizza' },
+    { name: 'Crispy Fried Chicken', imageSrc: '/src/assets/fried-chicken.jpg', alt: 'Crispy Fried Chicken' },
+    { name: 'Sweet Desserts', imageSrc: '/src/assets/dessert-cake.jpg', alt: 'Sweet Desserts' },
+    { name: 'Fresh Wraps & Rolls', imageSrc: '/src/assets/wrap.jpg', alt: 'Fresh Wraps & Rolls' }
   ]
 
   const filteredMenuItems = activeMenuCategory === 'hot'
@@ -223,7 +223,7 @@ function App() {
           <div className="hero-visual">
             <div className="hero-image-wrapper">
               <div className="hero-image-placeholder">
-                <span className="hero-emoji">🍔</span>
+                <img src="/images/burger-hero.jpg" alt="Juicy gourmet burger" className="hero-img" />
               </div>
               <div className="hero-floating-card card-1">
                 <span className="card-icon">🔥</span>
@@ -256,31 +256,31 @@ function App() {
         <div className="container">
           <div className="featured-items">
             <div className="featured-item">
-              <span className="fi-icon">🍗</span>
+              <img src="/images/fried-chicken.jpg" alt="Crispy Fried Chicken" className="featured-img" />
               <span>Crispy Fried Chicken</span>
             </div>
             <div className="featured-item">
-              <span className="fi-icon">🍔</span>
+              <img src="/images/burger-hero.jpg" alt="Gourmet Burgers" className="featured-img" />
               <span>Gourmet Burgers</span>
             </div>
             <div className="featured-item">
-              <span className="fi-icon">🍕</span>
+              <img src="/images/pizza.jpg" alt="Artisan Pizzas" className="featured-img" />
               <span>Artisan Pizzas</span>
             </div>
             <div className="featured-item">
-              <span className="fi-icon">🌯</span>
+              <img src="/images/wrap.jpg" alt="Fresh Wraps & Rolls" className="featured-img" />
               <span>Fresh Wraps & Rolls</span>
             </div>
             <div className="featured-item">
-              <span className="fi-icon">🍟</span>
+              <img src="/images/fried-chicken.jpg" alt="Loaded Fries" className="featured-img" />
               <span>Loaded Fries</span>
             </div>
             <div className="featured-item">
-              <span className="fi-icon">🍦</span>
+              <img src="/images/ice-cream.jpg" alt="Ice Cream Shakes" className="featured-img" />
               <span>Ice Cream Shakes</span>
             </div>
             <div className="featured-item">
-              <span className="fi-icon">🥪</span>
+              <img src="/images/wrap.jpg" alt="Grilled Sandwiches" className="featured-img" />
               <span>Grilled Sandwiches</span>
             </div>
           </div>
@@ -303,12 +303,12 @@ function App() {
                 onClick={() => setActiveCategory(cat.id)}
               >
                 <div className="category-icon">
-                  {cat.id === 'all' && '🍽️'}
-                  {cat.id === 'burgers' && '🍔'}
-                  {cat.id === 'pizza' && '🍕'}
-                  {cat.id === 'chicken' && '🍗'}
-                  {cat.id === 'wraps' && '🌯'}
-                  {cat.id === 'desserts' && '🍰'}
+                  {cat.id === 'all' && <img src="/images/restaurant-interior.jpg" alt="All items" className="category-img" />}
+                  {cat.id === 'burgers' && <img src="/images/burger-hero.jpg" alt="Burgers" className="category-img" />}
+                  {cat.id === 'pizza' && <img src="/images/pizza.jpg" alt="Pizza" className="category-img" />}
+                  {cat.id === 'chicken' && <img src="/images/fried-chicken.jpg" alt="Fried Chicken" className="category-img" />}
+                  {cat.id === 'wraps' && <img src="/images/wrap.jpg" alt="Wraps" className="category-img" />}
+                  {cat.id === 'desserts' && <img src="/images/dessert-cake.jpg" alt="Desserts" className="category-img" />}
                 </div>
                 <span className="category-name">{cat.name}</span>
                 <span className="category-count">{cat.count} items</span>
@@ -324,9 +324,7 @@ function App() {
           <div className="about-visual">
             <div className="about-image-placeholder">
               <span className="about-years-badge">12+<br />Years of<br />Excellence</span>
-              <div className="about-emoji-wrapper">
-                <span className="about-main-emoji">🍽️</span>
-              </div>
+              <img src="/images/restaurant-interior.jpg" alt="Restaurant interior" className="about-img" />
             </div>
           </div>
           <div className="about-content">
@@ -409,7 +407,7 @@ function App() {
               <div key={item.id} className="menu-card">
                 {item.badge && <span className="menu-badge">{item.badge}</span>}
                 <div className="menu-card-image">
-                  <span className="menu-emoji">{item.image}</span>
+                  <img src={item.imageSrc} alt={item.alt} className="menu-img" />
                 </div>
                 <div className="menu-card-body">
                   <h3 className="menu-item-name">{item.name}</h3>
@@ -437,7 +435,7 @@ function App() {
         <div className="container limited-offer-grid">
           <div className="limited-offer-visual">
             <div className="offer-image-placeholder">
-              <span className="offer-emoji">🍔</span>
+              <img src="/images/burger-offer.jpg" alt="Special burger offer" className="offer-img" />
             </div>
           </div>
           <div className="limited-offer-content">
@@ -485,7 +483,7 @@ function App() {
                 className={`showcase-card ${activeShowcase === idx ? 'active' : ''}`}
                 onClick={() => setActiveShowcase(idx)}
               >
-                <span className="showcase-icon">{item.icon}</span>
+                <img src={item.imageSrc} alt={item.alt} className="showcase-img" />
                 <span className="showcase-name">{item.name}</span>
               </div>
             ))}
@@ -534,7 +532,7 @@ function App() {
             {chefs.map((chef, idx) => (
               <div key={idx} className="chef-card">
                 <div className="chef-image">
-                  <span className="chef-emoji">{chef.image}</span>
+                  <img src={chef.imageSrc} alt={chef.alt} className="chef-img" />
                 </div>
                 <h3 className="chef-name">{chef.name}</h3>
                 <span className="chef-role">{chef.role}</span>
@@ -747,7 +745,7 @@ function App() {
                     <span className="blog-date-num">{post.date}</span>
                     <span className="blog-date-month">{post.month}</span>
                   </div>
-                  <span className="blog-placeholder-icon">📝</span>
+                  <img src={post.imageSrc} alt={post.alt} className="blog-img" />
                 </div>
                 <div className="blog-card-body">
                   <span className="blog-category">{post.category}</span>
