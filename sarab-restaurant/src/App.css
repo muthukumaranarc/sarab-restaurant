@@ -610,15 +610,30 @@ input, select, textarea {
   padding: 24px 0;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  position: relative; /* Required for the fade overlay mask if needed */
 }
 
 .featured-items {
   display: flex;
-  justify-content: space-between;
+  /* Changed from space-between to flex-start to prevent awkward spacing when scrolling */
+  justify-content: flex-start; 
   align-items: center;
   gap: 16px;
   overflow-x: auto;
-  padding: 4px 0;
+  padding: 8px 4px; /* Increased vertical padding to avoid item clipping during hover animation */
+  
+  /* Modern touch scrolling performance features */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; 
+  
+  /* Hide default scrollbars for Chrome, Safari and Opera */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide default scrollbars for Chrome, Safari, and Opera */
+.featured-items::-webkit-scrollbar {
+  display: none;
 }
 
 .featured-item {
@@ -634,12 +649,20 @@ input, select, textarea {
   color: var(--text-secondary);
   transition: var(--transition);
   cursor: pointer;
+  flex-shrink: 0; /* CRITICAL: Prevents items from compressing/shrinking inside the scroll area */
 }
 
 .featured-item:hover {
   background: rgba(255,107,53,0.1);
   color: var(--primary);
   transform: translateY(-2px);
+}
+
+.featured-img {
+  width: 24px;   /* Added absolute dimensions for image stability */
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .fi-icon {

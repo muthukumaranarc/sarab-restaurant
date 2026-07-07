@@ -199,7 +199,6 @@ function App() {
       <header className="header">
         <div className="container header-inner">
           <div className="logo">
-            <span className="logo-icon">🍽️</span>
             <div className="logo-text">
               <h1>Sarab</h1>
               <span>Fast Food & Restaurant</span>
@@ -246,7 +245,7 @@ function App() {
             </p>
             <div className="hero-buttons">
               <button className="btn btn-primary btn-lg">Explore Menu</button>
-              <button className="btn btn-outline btn-lg">▶ Watch Our Story</button>
+              <button className="btn btn-outline btn-lg">Our Story</button>
             </div>
             {/* Minimal trusted badge */}
             <div className="hero-trusted">
@@ -386,7 +385,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <button className="btn btn-primary" onClick={() => scrollToSection('menu')}>View Full Menu</button>
+            <button className="btn btn-primary btn-lg" onClick={() => scrollToSection('menu')}>View Full Menu</button>
           </div>
         </div>
       </section>
@@ -904,7 +903,6 @@ function App() {
           <div className="footer-grid">
             <div className="footer-brand">
               <div className="logo">
-                <span className="logo-icon">🍽️</span>
                 <div className="logo-text">
                   <h1>Sarab</h1>
                   <span>Fast Food & Restaurant</span>
